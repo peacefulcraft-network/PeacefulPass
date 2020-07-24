@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import org.bukkit.entity.Player;
 
+import net.peacefulcraft.peacefulpass.PeacefulPass;
+
 public class PassPlayer
 {
     private int passExperience;
@@ -12,13 +14,18 @@ public class PassPlayer
 
     private Player user;
         public Player getPlayer() { return this.user; }
-        public void setPlayer(Player p) { this.user = p; }
 
     private UUID uuid;
         public UUID getUuid() { return this.uuid; }
 
-    public PassPlayer(UUID uuid) {
+    private PlayerData pd;
+
+    public PassPlayer(UUID uuid, PlayerData pd) {
         this.uuid = uuid;
+        this.user = PeacefulPass.getPluginInstance().getServer().getPlayer(uuid);
+
+        this.pd = pd;
+        this.passExperience = pd.getExperience();
 
     }
 }
